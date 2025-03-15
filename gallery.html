@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Jersey+25&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --index: calc(1vw + 1vh);
+            --transition: cubic-bezier(.1, .7, 0, 1);
+        }
+        
+        .gallery-container {
+            padding: 120px 0 60px 0;
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .gallery-title {
+            text-align: center;
+            color: #4eff4e;
+            margin-bottom: 50px;
+            font-size: 3rem;
+            position: relative;
+        }
+        
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #4eff4e;
+            border-radius: 2px;
+        }
+        
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 85vh;
+            width: 95%;
+            max-width: 1800px;
+        }
+        
+        .items {
+            display: flex;
+            gap: 0.6rem;
+            perspective: calc(var(--index) * 35);
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .item {
+            width: calc(var(--index) * 4.5);
+            height: calc(var(--index) * 16);
+            background-color: #222;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            filter: grayscale(1) brightness(.5);
+            transition: transform 1.25s var(--transition), filter 3s var(--transition), width 1.25s var(--transition);
+            will-change: transform, filter, rotateY, width;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .item::before, .item::after {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: 20px;
+            right: calc(var(--index) * -1);
+        }
+        
+        .item::after {
+            left: calc(var(--index) * -1);
+        }
+        
+        .items .item:hover {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 10));
+        }
+        
+        /*Right*/
+        .items .item:hover + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 8.5)) rotateY(35deg);
+            z-index: -1;
+        }
+        
+        .items .item:hover + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 5.6)) rotateY(40deg);
+            z-index: -2;
+        }
+        
+        .items .item:hover + * + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 2.5)) rotateY(30deg);
+            z-index: -3;
+        }
+        
+        .items .item:hover + * + * + * + * {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * .6)) rotateY(15deg);
+            z-index: -4;
+        }
+        
+        /*Left*/
+        .items .item:has( + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 8.5)) rotateY(-35deg);
+        }
+        
+        .items .item:has( + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 5.6)) rotateY(-40deg);
+        }
+        
+        .items .item:has( + * + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * 2.5)) rotateY(-30deg);
+        }
+        
+        .items .item:has( + * + * + * + :hover) {
+            filter: inherit;
+            transform: translateZ(calc(var(--index) * .6)) rotateY(-15deg);
+        }
+        
+        .items .item:active, .items .item:focus {
+            width: 35vw;
+            filter: inherit;
+            z-index: 100;
+            transform: translateZ(calc(var(--index) * 10));
+            margin: 0 .45vw;
+        }
+        
+        /* Simplified footer for gallery page */
+        .gallery-footer {
+            background-color: #000;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .gallery-footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .gallery-footer .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-footer .social-icons a:hover {
+            color: #4eff4e;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 1200px) {
+            .item {
+                width: calc(var(--index) * 4);
+                height: calc(var(--index) * 14);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .wrapper {
+                height: 75vh;
+            }
+            
+            .item {
+                width: calc(var(--index) * 3.5);
+                height: calc(var(--index) * 12);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .wrapper {
+                height: 60vh;
+            }
+            
+            .items {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                perspective: none;
+            }
+            
+            .item {
+                width: calc(var(--index) * 6);
+                height: calc(var(--index) * 10);
+            }
+            
+            .items .item:active, .items .item:focus {
+                width: 70vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Img/Logo.jpg" alt="Physics Club Logo">
+        </div>
+        <div class="nav-title">
+            <h1><span>SXC</span> Physics Club</h1>
+            <p>An Amaranthine Endeavour.</p>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="404.html">Events</a></li>
+            <li><a href="404.html">History</a></li>
+            <li class="dropdown">
+                <a href="#" class="active">Vault</a>
+                <div class="dropdown-content">
+                    <a href="gallery.html" class="active">Gallery</a>
+                    <a href="memes.html">Memes</a>
+                </div>
+            </li>
+            <li><a href="404.html">Team</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="gallery-container">
+        <h1 class="gallery-title">Our Gallery</h1>
+        
+        <div class="wrapper">
+            <div class="items">
+                <div class="item" tabindex="0" style="background-image: url(Images/1.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/2.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/3.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/4.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/5.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/6.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/7.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/8.jpg)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/9.png)"></div>
+                <div class="item" tabindex="0" style="background-image: url(Images/10.jpg)"></div>
+                
+            </div>
+        </div>
+    </div>
+
+    <footer class="gallery-footer">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/sxcphysicsclub/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/sxcphysicsclub/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="home.html"><i class="fas fa-globe"></i></a>
+            <a href="mailto:sxcphysicsclub@sxc.edu.np"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; Physics Club 2025 | Designed by Aarav Thakur</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html> 

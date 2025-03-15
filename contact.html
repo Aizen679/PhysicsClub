@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Jersey+25&display=swap" rel="stylesheet">
+    <style>
+        .contact-container {
+            padding: 120px 0 60px 0;
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('Img/stars.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 0;
+        }
+        
+        .contact-title {
+            text-align: center;
+            color: #4eff4e;
+            margin-bottom: 50px;
+            font-size: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #4eff4e;
+            border-radius: 2px;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(17, 17, 17, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(78, 255, 78, 0.2);
+        }
+        
+        .contact-info h3 {
+            color: #4eff4e;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .info-item i {
+            color: #4eff4e;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        .info-details {
+            color: #ddd;
+        }
+        
+        .info-details h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .info-details p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links h4 {
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(78, 255, 78, 0.1);
+            border-radius: 50%;
+            color: #4eff4e;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: #4eff4e;
+            color: #000;
+            transform: translateY(-5px);
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(17, 17, 17, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(78, 255, 78, 0.2);
+        }
+        
+        .contact-form h3 {
+            color: #4eff4e;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .feedback-body {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            color: #ddd;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            background-color: rgba(34, 34, 34, 0.8);
+            border: 1px solid rgba(78, 255, 78, 0.3);
+            border-radius: 5px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #4eff4e;
+            box-shadow: 0 0 10px rgba(78, 255, 78, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .feedback-body__submit {
+            padding: 17px 40px;
+            border-radius: 10px;
+            border: 0;
+            background-color: #4eff4e;
+            letter-spacing: 1.5px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: #197619 0px 10px 0px 0px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+        
+        .feedback-body__submit:hover {
+            box-shadow: #095609 0px 7px 0px 0px;
+        }
+        
+        .feedback-body__submit:active {
+            background-color: #1bc71b;
+            box-shadow: #086208 0px 0px 0px 0px;
+            transform: translateY(5px);
+            transition: 200ms;
+        }
+        
+        /* Footer styling to match memes.html */
+        footer {
+            background-color: #111;
+            color: #777;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+        }
+        
+        footer .social-icons {
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        footer .social-icons a {
+            width: 35px;
+            height: 35px;
+            font-size: 1rem;
+            background-color: transparent;
+            border: 1px solid rgba(78, 255, 78, 0.3);
+        }
+        
+        footer .social-icons a:hover {
+            background-color: rgba(78, 255, 78, 0.1);
+            border-color: #4eff4e;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .contact-info, .contact-form {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Img/Logo.jpg" alt="Physics Club Logo">
+        </div>
+        <div class="nav-title">
+            <h1><span>SXC</span> Physics Club</h1>
+            <p>An Amaranthine Endeavour.</p>
+        </div>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="404.html">Events</a></li>
+            <li><a href="404.html">History</a></li>
+            <li class="dropdown">
+                <a href="#">Vault</a>
+                <div class="dropdown-content">
+                    <a href="gallery.html">Gallery</a>
+                    <a href="memes.html">Memes</a>
+                </div>
+            </li>
+            <li><a href="404.html">Team</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="contact-container">
+        <h1 class="contact-title">Contact The Club</h1>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-details">
+                        <h4>Location</h4>
+                        <p>St. Xavier's College, Maitighar, Kathmandu, Nepal</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info-details">
+                        <h4>Email</h4>
+                        <p>sxcphysicsclub@sxc.edu.np</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/sxcphysicsclub/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/sxcphysicsclub/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Send Us A Message</h3>
+                <form class="feedback-body">
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" placeholder="Enter message subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Enter your message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="feedback-body__submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/sxcphysicsclub/" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/sxcphysicsclub/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="home.html"><i class="fas fa-globe"></i></a>
+            <a href="mailto:sxcphysicsclub@sxc.edu.np"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; Physics Club 2025 | Designed by Aarav Thakur</p>
+    </footer>
+
+    <script>
+        (function () {
+            var btn = document.getElementsByClassName("feedback-body__submit")[0];
+            btn.onclick = function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const fullname = document.getElementById('fullname').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Basic validation
+                if (fullname && email && subject && message) {
+                    // In a real application, you would send this data to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    
+                    // Reset form
+                    document.querySelector('.feedback-body').reset();
+                } else {
+                    alert('Please fill in all fields.');
+                }
+            }
+            
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        })();
+    </script>
+</body>
+</html> 
